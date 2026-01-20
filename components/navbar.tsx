@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Button from "./button";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -52,8 +53,8 @@ export default function Navbar() {
         <Link href="#about" className="hover:text-accent transition-colors">
           About us
         </Link>
-        <Link href="#projects" className="hover:text-accent transition-colors">
-          Projects
+        <Link href="#work" className="hover:text-accent transition-colors">
+          Work
         </Link>
         <Link href="#services" className="hover:text-accent transition-colors">
           Services
@@ -64,16 +65,10 @@ export default function Navbar() {
       </div>
 
       {/* CTA Button */}
-      <Link
-        href="#contact"
-        className={`hidden md:block px-6 py-2.5 text-sm font-medium ease-in-out transition-all duration-300 rounded-full ${
-          isScrolled
-            ? "bg-[#A6FF79] text-black "
-            : "bg-white text-black hover:bg-[#A6FF79] "
-        }`}
-      >
+      {/* CTA Button */}
+      <Button href="#contact" className="hidden md:flex">
         Contact us
-      </Link>
+      </Button>
 
       {/* Mobile Menu Toggle (Placeholder) */}
       <button className="md:hidden">

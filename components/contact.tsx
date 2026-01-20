@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import Button from "./button";
 
 export default function Contact() {
   return (
@@ -55,9 +56,9 @@ export default function Contact() {
             placeholder="Phone number"
             className="flex-1 px-6 py-4 text-gray-800 placeholder:text-gray-500 outline-none rounded-sm"
           />
-          <button className="bg-[#A6FF79] hover:bg-[#95e66d] text-black font-medium px-8 py-4 rounded-sm transition-colors whitespace-nowrap">
+          <Button className="bg-[#A6FF79] hover:bg-[#95e66d] text-black">
             Get a free consultation
-          </button>
+          </Button>
         </motion.div>
       </div>
     </section>

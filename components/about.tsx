@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import Link from "next/link";
+import Button from "./button";
 
 const stats = [
   { value: "70%", label: "Savings on Energy Bills" },
@@ -41,12 +42,7 @@ export default function About() {
             effective.
           </h2>
 
-          <Link
-            href="#about-company"
-            className="inline-block bg-accent px-8 py-4 text-dark-green font-medium hover:bg-opacity-90 transition-colors"
-          >
-            About Company
-          </Link>
+          <Button href="#about-company">About Company</Button>
         </motion.div>
 
         {/* Right Image/Content - Using a placeholder wind farm image to match screenshot roughly */}

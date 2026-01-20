@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import Link from "next/link";
+import Button from "./button";
 
 export const achievements = [
   {
@@ -74,12 +75,7 @@ export default function Achievements() {
         </div>
 
         <div className="mt-20 text-center">
-          <Link
-            href="#get-started"
-            className="inline-block bg-accent px-10 py-4 text-dark-green font-medium hover:bg-opacity-90 transition-colors rounded-sm"
-          >
-            Let's get started
-          </Link>
+          <Button href="#get-started">Let's get started</Button>
         </div>
       </div>
     </section>

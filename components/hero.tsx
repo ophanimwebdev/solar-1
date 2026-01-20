@@ -2,21 +2,23 @@
 
 import { motion } from "motion/react";
 import Link from "next/link";
+import Button from "./button";
 
 export default function Hero() {
   return (
     <section className="relative w-full h-screen overflow-hidden">
       {/* Background Image */}
-      <section
-        className="absolute inset-0 z-0 bg-cover bg-center"
-        style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=2070&auto=format&fit=crop')",
-        }}
-      >
-        {/* Overlay */}
-        <section className="absolute inset-0 bg-black/40" />
-      </section>
+      {/* Background Video */}
+      <video
+        className="absolute inset-0 z-0 w-full h-full object-cover"
+        src="/hero_video.mp4"
+        autoPlay
+        muted
+        loop
+        playsInline
+      />
+      {/* Overlay */}
+      <section className="absolute inset-0 bg-black/40 z-0" />
 
       {/* Content */}
       <article className="relative z-10 w-full h-full flex flex-col justify-center px-6 md:px-12">
@@ -44,12 +46,7 @@ export default function Hero() {
             emissions, and create a sustainable tomorrow.
           </p>
 
-          <Link
-            href="#get-started"
-            className="inline-block bg-white text-black px-6 py-2.5 font-medium transition-colors rounded-full hover:bg-[#A6FF79]"
-          >
-            Get started
-          </Link>
+          <Button href="#get-started">Get started</Button>
         </motion.section>
       </article>
     </section>

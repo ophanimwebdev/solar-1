@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Instagram, Linkedin, Twitter } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -36,61 +37,19 @@ export default function Footer() {
                 href="#"
                 className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-dark-green hover:bg-accent transition-colors"
               >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"
-                  ></path>
-                </svg>
+                <Instagram className="w-5 h-5" />
               </Link>
               <Link
                 href="#"
                 className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-dark-green hover:bg-accent transition-colors"
               >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
-                  ></path>
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  ></path>
-                </svg>
+                <Twitter className="w-5 h-5" />
               </Link>
               <Link
                 href="#"
                 className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-dark-green hover:bg-accent transition-colors"
               >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"
-                  ></path>
-                </svg>
+                <Linkedin className="w-5 h-5" />
               </Link>
             </div>
           </div>

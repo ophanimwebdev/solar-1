@@ -1,7 +1,9 @@
 "use client";
 
-import { motion } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
 import Link from "next/link";
+import { useRef } from "react";
+import Button from "./button";
 
 const services = [
   {
@@ -70,86 +72,108 @@ const services = [
 ];
 
 export default function Services() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  });
+
+  // transforms for the 3 service cards
+  const y1 = useTransform(scrollYProgress, [0, 0.2], [100, 0]);
+  const opacity1 = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
+
+  const y2 = useTransform(scrollYProgress, [0.2, 0.45], [100, 0]);
+  const opacity2 = useTransform(scrollYProgress, [0.2, 0.45], [0, 1]);
+
+  const y3 = useTransform(scrollYProgress, [0.45, 0.7], [100, 0]);
+  const opacity3 = useTransform(scrollYProgress, [0.45, 0.7], [0, 1]);
+
+  // transform for the image card
+  const y4 = useTransform(scrollYProgress, [0.7, 0.9], [100, 0]);
+  const opacity4 = useTransform(scrollYProgress, [0.7, 0.9], [0, 1]);
+
+  // Array of transform objects to map easily
+  const transforms = [
+    { y: y1, opacity: opacity1 },
+    { y: y2, opacity: opacity2 },
+    { y: y3, opacity: opacity3 },
+  ];
+
   return (
-    <section
-      id="services"
-      className="py-20 px-6 md:px-12"
-    >
-      <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-        <div>
-          <div className="flex items-center gap-2 text-sm font-medium mb-4 text-gray-500">
-            <span className="w-1.5 h-1.5 rounded-full bg-black"></span>
-            Our Services
-            <span className="w-1.5 h-1.5 rounded-full bg-black"></span>
-          </div>
-          <h2 className="text-3xl md:text-5xl font-medium text-dark-green max-w-lg tracking-tighter">
-            Our solutions, your sustainable future.
-          </h2>
-        </div>
-        <Link
-          href="#all-services"
-          className="bg-accent px-6 py-3 text-dark-green font-medium hover:bg-opacity-90 transition-colors whitespace-nowrap"
-        >
-          View all
-        </Link>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {services.map((service, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="group relative bg-[#1D3D3E] py-8 px-6 flex flex-col justify-between text-white overflow-hidden"
-          >
-            <div className="">
-              <div className="w-12 h-12 bg-accent text-dark-green flex items-center justify-center rounded-sm mb-6">
-                {service.icon}
+    <section ref={containerRef} id="services" className="relative h-[250vh]">
+      <div className="sticky top-0 h-screen overflow-hidden">
+        <div className="flex h-full flex-col justify-center px-6 md:px-12 py-20">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+            <div>
+              <div className="flex items-center gap-2 text-sm font-medium mb-4 text-gray-500">
+                <span className="w-1.5 h-1.5 rounded-full bg-black"></span>
+                Our Services
+                <span className="w-1.5 h-1.5 rounded-full bg-black"></span>
               </div>
-              <h3 className="text-2xl font-medium mb-4 leading-tight text-accent">
-                {service.title}
-              </h3>
-              <p className="text-gray-300 leading-relaxed text-sm">
-                {service.description}
-              </p>
+              <h2 className="text-3xl md:text-5xl font-medium text-dark-green max-w-lg tracking-tighter">
+                Our solutions, your sustainable future.
+              </h2>
             </div>
-
-            <Link
-              href="#"
-              className="flex items-center gap-2 text-sm font-medium hover:gap-3 transition-all text-white mt-5 hover:text-accent"
-            >
-              Learn more <span className="text-lg">→</span>
-            </Link>
-          </motion.div>
-        ))}
-
-        {/* Image Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="relative w-full bg-cover bg-center"
-          style={{
-            backgroundImage:
-              "url('/panels.png')",
-          }}
-        >
-          <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
-          <div className="absolute top-8 left-8 flex flex-col gap-3 items-start">
-            <span className="bg-[#1D3D3E] backdrop-blur-md text-white px-3 py-1 text-lg font-medium mt-10">
-              Solar Power
-            </span>
-            <span className="bg-[#1D3D3E] mt-10 ml-20 backdrop-blur-md text-white px-3 py-1 text-lg font-medium">
-              Energy Storage
-            </span>
-            <span className="bg-[#1D3D3E] backdrop-blur-md text-white px-3 py-1 text-lg font-medium mt-10 ml-5">
-              Green Solutions
-            </span>
+            <Button href="#all-services">View all</Button>
           </div>
-        </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {services.map((service, index) => (
+              <motion.div
+                key={index}
+                style={{
+                  y: transforms[index].y,
+                  opacity: transforms[index].opacity,
+                }}
+                className="group relative bg-[#1D3D3E] py-8 px-6 flex flex-col justify-between text-white overflow-hidden h-[400px]"
+              >
+                <div className="">
+                  <div className="w-12 h-12 bg-accent text-dark-green flex items-center justify-center rounded-sm mb-6">
+                    {service.icon}
+                  </div>
+                  <h3 className="text-2xl font-medium mb-4 leading-tight text-accent">
+                    {service.title}
+                  </h3>
+                  <p className="text-gray-300 leading-relaxed text-sm">
+                    {service.description}
+                  </p>
+                </div>
+
+                <Link
+                  href="#"
+                  className="flex items-center gap-2 text-sm font-medium hover:gap-3 transition-all text-white mt-5 hover:text-accent"
+                >
+                  Learn more <span className="text-lg">→</span>
+                </Link>
+              </motion.div>
+            ))}
+
+            {/* Image Card */}
+            <motion.div
+              style={{ y: y4, opacity: opacity4 }}
+              className="relative w-full bg-cover bg-center h-[400px]"
+              initial={{
+                backgroundImage: "url('/panels.png')",
+              }}
+              animate={{
+                backgroundImage: "url('/panels.png')",
+              }}
+            >
+              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
+              <div className="absolute top-8 left-8 flex flex-col gap-3 items-start">
+                <span className="bg-[#1D3D3E] backdrop-blur-md text-white px-3 py-1 text-lg font-medium mt-10">
+                  Solar Power
+                </span>
+                <span className="bg-[#1D3D3E] mt-10 ml-20 backdrop-blur-md text-white px-3 py-1 text-lg font-medium">
+                  Energy Storage
+                </span>
+                <span className="bg-[#1D3D3E] backdrop-blur-md text-white px-3 py-1 text-lg font-medium mt-10 ml-5">
+                  Green Solutions
+                </span>
+              </div>
+            </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );
